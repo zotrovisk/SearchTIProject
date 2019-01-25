@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Microcurso de Bootstrap</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+
+
+      <script >
+
+      function limita(numero){
+      var max_numeros = 5;
+      console.log("Valor numero: "+numero.value);
+
+      if(numero.value.length > max_numeros) {
+        numero.value = numero.value.substr(0, max_numeros);
+      }
+
+
+    }
+
+
+      </script>
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            Informações de Parametrização
+          </a>
+        </div>
+      </div>
+    </nav>
+
+
+    <div class="container">
+      <form action="file:///C:/xampp/htdocs/atualizar.html">
+      <div class="form-group ">
+        <hr/>
+          <label for="inputState"><p>Selecione o tipo de demanda desejada:</p></label></br>
+          <select style="width:210px;height:30px" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+            <option selected disabled>Tipos de Demanda</option>
+            <option value="1">Atualizar Oportunidade</option>
+            <option value="2">Replicar Oportunidade</option>
+            <option value="3">Criação de Oportunidade</option>
+          </select>
+        </br>
+        </br>
+          <label for="exampleInputEmail1">Nome do Funcionário: </label>
+            <input  style="width:280px" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nome">
+
+        </br>
+          <label for="exampleInputEmail1">Matrícula: </label>
+            <input  style="width:280px" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Matrícula">
+
+          </br>
+            <label for="exampleInputEmail1">Prefixo de Localização: </label>
+              <input  style="width:280px" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Prefixo">
+            </br>
+
+
+
+
+
+      </div>
+        <button type="submit" class="btn btn-primary">Acessar</button>
+        <hr/>
+      </form>
+
+    </div>
+
+
+
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/validacao.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  </body>
+</html>

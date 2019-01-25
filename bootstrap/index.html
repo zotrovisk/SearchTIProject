@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Microcurso de Bootstrap</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            Microcurso de Bootstrap
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <!-- Nav tabs -->
+        <ul id="tabEtapas" class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#etapa1" aria-controls="etapa1" role="tab" data-toggle="tab">Etapa 1</a></li>
+          <li role="presentation"><a href="#etapa2" aria-controls="etapa2" role="tab" data-toggle="tab">Etapa 2</a></li>
+          <li role="presentation"><a href="#etapa3" aria-controls="etapa3" role="tab" data-toggle="tab">Etapa 3</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="etapa1">
+            <h2>Etapa 1</h2>
+            <p>
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  Informações pessoais <strong id="dica1" onmouseout="escondePopover('dica1')" onmouseover="exibePopover('dica1')" data-container="body" data-toggle="popover" data-placement="top" data-content="Neste formulário você deve preencher seu nome e seu e-mail">(Dicas)</strong>
+                </div>
+              </div>
+
+            </p>
+            <form>
+              <div class="form-group col-md-6">
+                <label>Nome</label>
+                <input type="text" class="form-control" id="nome" data-toggle="tooltip" data-placement="top" title="Preencha um nome válido">
+              </div>
+              <div class="form-group col-md-6">
+                <label>E-mail</label>
+                <input type="text" class="form-control" id="email" data-toggle="tooltip" data-placement="top" title="Preencha um e-mail válido">
+              </div>
+            </form>
+            <button onclick="alteraEtapa(2)" class="btn btn-info">Próxima Etapa</button>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="etapa2">
+            <h2>Etapa 2</h2>
+            <p>
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  Informações pessoais <strong id="dica2" onmouseout="escondePopover('dica2')" onmouseover="exibePopover('dica2')" data-container="body" data-toggle="popover" data-placement="top" data-content="Neste formulário você deve preencher sua cidade e a sigla do seu estado">(Dicas)</strong>
+                </div>
+              </div>
+
+            </p>
+            <form>
+              <div class="form-group col-md-6">
+                <label>Cidade</label>
+                <input type="text" class="form-control" id="cidade" data-toggle="tooltip" data-placement="top" title="Preencha um nome de cidade válido">
+              </div>
+              <div class="form-group col-md-6">
+                <label>Estado</label>
+                <input type="text" class="form-control" id="estado" data-toggle="tooltip" data-placement="top" title="Preencha um estado válido">
+              </div>
+            </form>
+            <button onclick="alteraEtapa(3)" class="btn btn-info">Próxima Etapa</button>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="etapa3">
+            <h2>Etapa 3</h2>
+            <p>
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  Informações pessoais <strong id="dica3" onmouseout="escondePopover('dica3')" onmouseover="exibePopover('dica3')" data-container="body" data-toggle="popover" data-placement="top" data-content="Neste formulário você deve preencher seu Facebook e seu Twitter">(Dicas)</strong>
+                </div>
+              </div>
+
+            </p>
+            <form>
+              <div class="form-group col-md-6">
+                <label>Facebook</label>
+                <input type="text" class="form-control" id="facebook" data-toggle="tooltip" data-placement="top" title="Preencha um Facebook válido">
+              </div>
+              <div class="form-group col-md-6">
+                <label>Twitter</label>
+                <input type="text" class="form-control" id="twitter" data-toggle="tooltip" data-placement="top" title="Preencha um Twitter válido">
+              </div>
+            </form>
+            <button onclick="validaFormulario()" class="btn btn-success">Salvar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/validacao.js"></script>
+  </body>
+</html>

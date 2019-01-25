@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+
+
+    <script>
+      var valueChecked ="";
+
+      $(function () {
+        $('#pills-tab li:first-child a').tab('show')
+      })
+
+
+      $(document).on('change', '.get-relevancia', function () {
+        valueChecked = $(this).val();
+
+
+      });
+
+$(document).on('change', '.get-inputRelevancia', function () {
+         //valueChecked = $(this).val();
+         var idInputRelevancia = this.id;
+         console.log("ID inputRelevancia: "+idInputRelevancia);
+
+        $('input[type="checkbox"]').each(function() {
+              var valueCheckbox = "";
+              valueCheckbox = $(this).val();
+             console.log("Value valueCheckbox: "+valueCheckbox);
+             console.log("Value ID: "+idInputRelevancia);
+
+             if(idInputRelevancia == valueCheckbox){
+
+
+               var elemento = document.getElementById(valueCheckbox);
+               //this.checked = false;
+                $(this).prop('checked', false);
+             }
+
+             //console.log(inputtext);
+             /*
+             if(this.checked == false){
+               var elemento = document.getElementById(inputtext);
+               //console.log(elemento);
+                $(elemento).val("");
+             }*/
+
+       });
+        //console.log("inputRelevancia"+valueChecked);
+
+      });
+
+
+      $(document).on('click', '#btnAtribuir', function (e) {
+
+        $('input[type="checkbox"]').each(function() {
+             var inputtext = $(this).val();
+             //console.log(inputtext);
+             if(this.checked == true){
+               var elemento = document.getElementById(inputtext);
+               //console.log(elemento);
+                $(elemento).val(valueChecked);
+             }
+       });
+    });
+
+
+
+
+
+    $(document).on('click', '#all', function (e) {
+     $('input[type="checkbox"]').not('#all').each(function() {
+          var checked = $(this).is(':checked');
+         checked ? $(this).prop('checked', false) : $(this).prop('checked', true);
+    });
+  });
+
+
+  $(document).on('click', '#all2', function (e) {
+   $('input[type="checkbox"]').not('#all2').each(function() {
+        var checked = $(this).is(':checked');
+       checked ? $(this).prop('checked', false) : $(this).prop('checked', true);
+  });
+});
+
+
+
+  function limita(numero){
+  var max_numeros = 5;
+  console.log("Valor numero: "+numero.value);
+
+  if(numero.value.length > max_numeros) {
+    numero.value = numero.value.substr(0, max_numeros);
+  }
+
+
+}
+
+function add(_this){
+  console.log("Valor numero: "+inputtext);
+}
+
+
+
+function bloqueiaNumero(texto){
+
+var tecla = texto.which || texto.keyCode;
+if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
+  return true;
+}else{
+  return false;
+}
+
+}
+
+    </script>
+
+
+        <style type="text/css">
+
+
+        .scrollbar {
+        margin-left: 30px;
+        float: left;
+        height: 300px;
+        width: 65px;
+        background: #fff;
+        overflow-y: scroll;
+        margin-bottom: 25px;
+    }
+    .force-overflow {
+        min-height: 450px;
+    }
+
+    .scrollbar-primary::-webkit-scrollbar {
+      width: 10px;
+      background-color: #F5F5F5; }
+
+    .scrollbar-primary::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+      background-color: #4285F4; }
+
+      .scrollbar-primary2::-webkit-scrollbar {
+        width: 10px;
+        background-color: #F5F5F5; }
+
+      .scrollbar-primary2::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+        background-color: #E0E3E5; }
+
+        /*Estilizando checkbox*/
+        /* Base for label styling */
+    [type="checkbox"]:not(:checked),
+    [type="checkbox"]:checked {
+      position: absolute;
+      left: -9999px;
+    }
+    [type="checkbox"]:not(:checked) + label,
+    [type="checkbox"]:checked + label {
+      position: relative;
+      padding-left: 1.95em;
+      cursor: pointer;
+    }
+
+    /* checkbox aspect */
+    [type="checkbox"]:not(:checked) + label:before,
+    [type="checkbox"]:checked + label:before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0;
+      width: 1.25em; height: 1.25em;
+      border: 2px solid #ccc;
+      background: #F9F9D4;
+      border-radius: 4px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+    }
+    /* checked mark aspect */
+    [type="checkbox"]:not(:checked) + label:after,
+    [type="checkbox"]:checked + label:after {
+      content: '\2713\0020';
+      position: absolute;
+      top: .15em; left: .22em;
+      font-size: 1.3em;
+      line-height: 0.8;
+      color: blue;
+      transition: all .2s;
+      font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+    }
+    /* checked mark aspect changes */
+    [type="checkbox"]:not(:checked) + label:after {
+      opacity: 0;
+      transform: scale(0);
+    }
+    [type="checkbox"]:checked + label:after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* accessibility */
+    [type="checkbox"]:checked:focus + label:before,
+    [type="checkbox"]:not(:checked):focus + label:before {
+      border: 2px dotted blue;
+    }
+
+
+        </style>
+
+  </head>
+  <body onload="loadNav()">
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            Atualização de Oportunidade
+          </a>
+        </div>
+      </div>
+    </nav>
+
+
+    <div class="container">
+      <div class="row">
+
+
+
+
+
+    <div class="form-row">
+
+      <ul id="tabEtapas" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#etapa1" aria-controls="etapa1" role="tab" data-toggle="tab">Formação Superior</a></li>
+        <li role="presentation"><a href="#etapa2" aria-controls="etapa2" role="tab" data-toggle="tab">Certificação</a></li>
+        <li role="presentation"><a href="#etapa3" aria-controls="etapa3" role="tab" data-toggle="tab">Cursos GTD</a></li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+
+
+        <div role="tabpanel" class="tab-pane active" id="etapa1">
+
+          <form id="formExemplo" data-toggle="validator" role="form">
+
+      <div class="form-group">
+
+        <div style="margin-left:5px" class="row justify-content-md-center">
+
+          <div >
+            <label style="margin-left:-5px" for="codoportunidade">Código da Oportunidade</label>
+            <input style="margin-left:-5px ;width:50px" id="codoportunidadeLetras" class="form-control"  type="text"  maxlength="3" onKeyPress="return bloqueiaNumero(event);" required/>
+            <input style="margin-left:70px;margin-top:-35px;width:200px" id="codoportunidadeNumeros" class="form-control" type="number"  onkeydown="add(this);" onkeyup="add(this);"  required /></br>
+
+          </div>
+          <span style="margin-left:-5px;margin-top:-14px" class="help-block">O Código da Função deve conter 3 letras e cinco (5) digitos respectivamente.</span>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="form-group">
+        <label for="codfuncao">Código da Função</label>
+        <input  style="width:280px" id="codfuncao" class="form-control" placeholder="Código da Função" type="number" onkeydown="limita(this);" onkeyup="limita(this);" required />
+
+        <span style="margin-top:5px" class="help-block">O Código da Função deve conter cinco (5) digitos</span>
+
+      </div>
+
+
+
+
+          <h3>Formação Superior</h3>
+          <p>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                 <strong id="dica1" onmouseout="escondePopover('dica1')" onmouseover="exibePopover('dica1')" data-container="body" data-toggle="popover" data-placement="top" data-content="Preencha as colunas abaixo para atualização da Formação Superior">
+                atualização de oportunidades</strong>
+              </div>
+            </div>
+
+          </p>
+
+
+
+          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-tabela" role="tab" aria-controls="pills-tabela" aria-selected="true">Informações Tabela</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" id="pills-graduacao-tab" data-toggle="pill" href="#pills-graduacao" role="tab" aria-controls="pills-graduacao" aria-selected="true">Pontuação Formação Superior</a>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link" id="pills-previa-tab" data-toggle="pill" href="#pills-previa" role="tab" aria-controls="pills-previa" aria-selected="false">Prévia</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="pills-tabContent">
+
+            <div class="tab-pane fade" id="pills-tabela" role="tabpanel" aria-labelledby="pills-tabela-tab">
+                        </br>
+                            <label for="codfuncao">Código TAO</label>
+                            <input  style="width:280px" id="codfuncao" class="form-control" placeholder="Código da tabela"   required />
+                            </br>
+                            <label for="codfuncao">Nome da Tabela</label>
+                            <input  style="width:280px" id="codfuncao" class="form-control" placeholder="Nome da tabela"   required />
+
+            </div>
+
+            <div class="tab-pane fade" id="pills-graduacao" role="tabpanel" aria-labelledby="pills-graduacao-tab">
+
+            </br>
+                <label for="codfuncao">Pontuação Graduação</label>
+                <input  style="width:280px" id="codfuncao" class="form-control" placeholder="pontuação"   required />
+                </br>
+
+                  <fieldset class="form-group">
+                          <div style="margin-left: 2px;width:500px;background-color:#EAEDED" class="row">
+
+                            <div class="col-sm-10">
+                              <label style="font-size:20px" class="form-check-label" for="gridRadios1">
+                              Critérios de pontuação da graduação
+                              </label>
+                            </br>
+                              <div class="form-check">
+
+                                <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="option1"  checked>
+                                <label  class="form-check-label" for="gridRadios1">
+                                100% maior pontuação
+                                </label>
+
+                              </div>
+                              <div class="form-check">
+
+                                <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="option2">
+                                <label class="form-check-label" for="gridRadios2"><h5  style="color:black" id="dicaRd1" onmouseout="escondePopover('dicaRd1')" onmouseover="exibePopover('dicaRd1')" data-container="body" data-toggle="popover" data-placement="top" data-content="Pontua 2 cursos de graduação onde a segunda graduaçao vale 50% da primeira">
+                                   100% maior pontuação + 50% 2&#170; maior pontuação</label>
+                              </div>
+                              <div class="form-check">
+
+                                <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios'" value="option3">
+                                <label class="form-check-label" for="gridRadios2"><h5  style="color:black" id="dicaRd2" onmouseout="escondePopover('dicaRd2')" onmouseover="exibePopover('dicaRd2')" data-container="body" data-toggle="popover" data-placement="top" data-content="Pontua 2 cursos de graduação onde a segunda graduaçao vale 100% da primeira">
+                                   100% maior pontuação + 100% 2&#170; maior pontuação</label>
+                              </div>
+                            </div>
+                          </div>
+                </fieldset>
+
+
+                <p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Pós Graduação
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+  </br>
+        <label for="codfuncao">Pontuação Pós Graduação</label>
+        <input  style="width:280px" id="codfuncao" class="form-control" placeholder="pontuação"   required />
+        </br>
+
+      <fieldset class="form-group">
+              <div style="margin-left: 2px;width:500px;background-color:#EAEDED" class="row">
+
+                <div class="col-sm-10">
+                  <label style="font-size:20px" class="form-check-label" for="gridRadios2">
+                  Critérios de pontuação da Pós graduação
+                  </label>
+                </br>
+                  <div class="form-check">
+
+                    <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="option1" checked>
+                    <label class="form-check-label" for="gridRadios2">
+                    <h5  style="color:black">100% maior pontuação </h5>
+                    </label>
+
+                  </div>
+                  <div class="form-check">
+
+                    <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="option2">
+
+                    <label class="form-check-label" for="gridRadios2"><h5  style="color:black" id="dicaRd1" >
+                       100% maior pontuação + 50% 2&#170; maior pontuação</h5></label>
+
+
+                  </div>
+                  <div class="form-check">
+
+                    <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="option3">
+                    <label class="form-check-label" for="gridRadios2"><h5  style="color:black" id="dicaRd2">
+                       100% maior pontuação + 100% 2&#170; maior pontuação</label>
+
+
+                  </div>
+                </div>
+              </div>
+    </fieldset>
+
+
+
+
+  </div>
+</div>
+
+
+             </div>
+
+
+            <div class="tab-pane fade" id="pills-previa" role="tabpanel" aria-labelledby="pills-previa-tab">
+...j
+
+            </div>
+          </div>
+
+          <div>
+          <hr style="border-width:2px"/>
+          <label for="relevancia"><h4 id="dica2" onmouseout="escondePopover('dica2')" onmouseover="exibePopover('dica2')" data-container="body" data-toggle="popover" data-placement="top" data-content="Clique nas áreas para acessar as suas respectivas subáreas.">
+             Indicação de Relevância - dica<h4/></label>
+
+
+
+
+
+        </div>
+
+
+
+
+
+        <div style="margin-left: -1px;width:1010px;height:250px" class="scrollbar scrollbar-primary2" >
+          <div  class="force-overflow">
+
+        <table style="width:1000px" class="table table-striped"  >
+        <thead >
+          <tr style="background-color:#EAEDED">
+            <th scope="col"><label for="areaSubarea">Áreas do conhecimento</label>
+
+              <input style="margin-left:500px;margin-top:18px" type="checkbox" id="all2" name="all2"/>
+              <label style="margin-left:500px"for="all2" class="checkbox-inline">Selecionar todas as áreas / subáreas</label>
+
+            </th>
+          </tr>
+        </thead>
+        <tbody >
+
+          <tr>
+
+            <th scope="row1">
+              <div style="margin-left:25px" class="form-group form-check">
+                <button style="color:black" type="button" class="btn btn-link" data-toggle="modal" data-target="#modalsubArea" data-whatever="@mdo"/>
+                <label for="areaSubarea">Área de Direito</label>
+              </div>
+            </th>
+
+
+            <th scope="row1">
+              <div style="margin-left:-980px;margin-top:-2px">
+                <input  type="checkbox" data-toggle="toggle" id="area1"  name="area1" value ="selectArea1"/>
+                <label  for="area1"/>
+              </div>
+            </th>
+
+          </tr>
+
+          <tr>
+
+            <th scope="row2">
+              <div style="margin-left:25px" class="form-group form-check">
+                <button style="color:black" type="button" class="btn btn-link" data-toggle="modal" data-target="#modalsubArea" data-whatever="@mdo"/>
+                <label for="areaSubarea">Área de Administração</label>
+              </div>
+            </th>
+
+
+            <th scope="row2">
+              <div style="margin-left:-980px;margin-top:-2px">
+                <input  type="checkbox" data-toggle="toggle" id="area2"  name="area2" value ="selectArea2"/>
+                <label  for="area2"/>
+              </div>
+            </th>
+
+          </tr>
+
+
+
+
+
+          <tr>
+
+            <th scope="row3">
+              <div style="margin-left:25px" class="form-group form-check">
+                <button style="color:black" type="button" class="btn btn-link" data-toggle="modal" data-target="#modalsubArea" data-whatever="@mdo"/>
+                <label for="areaSubarea">Área de Ciências Sociais Aplicadas</label>
+              </div>
+            </th>
+
+
+            <th scope="row3">
+              <div style="margin-left:-980px;margin-top:-2px">
+                <input  type="checkbox" data-toggle="toggle" id="area3"  name="area3" value ="selectArea3"/>
+                <label  for="area3"/>
+              </div>
+            </th>
+
+          </tr>
+
+    </tbody>
+    </table>
+  </div>
+  </div>
+
+
+
+
+
+
+        <div style="margin-top:270px; margin-bottom:20px" >
+        </br>
+
+
+          <strong >
+         <button id="dica3" onclick="" onmouseout="escondePopover('dica3')" onmouseover="exibePopover('dica3')" data-container="body"  data-placement="top" data-content="Preencha todos os campos acima para atualização de oportunidade" type="submit" style="margin-bottom:20px"  class="btn btn-info">Atualizar</button></strong>
+
+          <button style="margin-left:10px;margin-bottom:20px" onclick="alteraEtapa(2)" class="btn btn-info">>></button>
+
+        </div>
+
+
+
+
+      </div> <!--Final Tab 1-->
+
+
+        <div role="tabpanel" class="tab-pane" id="etapa2">
+          <h3>Certificação</h3>
+
+
+
+
+        </div>
+
+
+        <div role="tabpanel" class="tab-pane" id="etapa3">
+          <h2>Cursos GTD</h2>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+  </form>
+
+
+        <div class="modal fade" id="modalsubArea" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div  style="margin-left:-200px;;margin-top:200px ;width:900px;height:540px" class="modal-content">
+              <div style="margin-bottom:50px;height:145px"class="modal-header">
+                <label style="margin-top: -10px;margin-left:10px"for="areaSubarea"><h3>Área de Administração</h3></label>
+
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+
+              <div class="modal-body">
+
+                <form id="subArea">
+
+
+                  <div style="margin-top:-50px ;margin-left:-15px;width:900px;height:400px" class="scrollbar scrollbar-primary">
+
+                              <div  class="force-overflow">
+
+
+                                <div id="table">
+                                  <div style="margin-left:800px;background-image: url('img/bb.png');width:32px;height:32px"> </div>
+                                  <table style="margin-left:30px;margin-top:10px;width:800px"class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col">Subárea</th>
+                              <th scope="col">Relevância</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+
+
+                            <p style="margin-left:38px">
+                              <input style="margin-top:18px" type="checkbox" id="all" name="all"/>
+                              <label for="all" class="checkbox-inline">Selecionar todas as subáreas</label>
+                             </p>
+
+                            <tr>
+
+                              <th scope="row">
+                                <input  type="checkbox" data-toggle="toggle" id="subArea1"  name="subArea1" value ="selectSubArea1"/>
+                                <label for="subArea1" class="checkbox-inline">Administração de Empresas </label>
+                              </th>
+
+                              <td>
+
+                                <select  style="width:118px;background-color:#FFFFFF" class="form-control get-inputRelevancia" type="text"  id="selectSubArea1" name="selectSubArea1" maxlength='4'>
+                                    <option style="background-color:#3268B6;color:white" value='Selecione uma relevância' selected disabled>Relevância</option>
+                                    <option style="background-color:#3268B6;color:white" value='altissima' >altissima</option>
+                                    <option style="background-color:#3268B6;color:white" value='alta'>alta</option>
+                                    <option style="background-color:#3268B6;color:white" value='media'>media</option>
+                                    <option style="background-color:#3268B6;color:white" value='baixa'>baixa</option>
+                                </select>
+
+                              </td>
+
+                            </tr>
+                            <tr>
+                              <th scope="row">
+                                <input  type="checkbox" data-toggle="toggle" id="subArea2"  name="subArea2" value ="selectSubArea2"/>
+                                <label for="subArea2" class="checkbox-inline">ADM - Comércio Exterior </label>
+                              </th>
+                              <td>
+
+                                <select  style="width:118px;background-color:#FFFFFF" class="form-control get-inputRelevancia" type="text"  id="selectSubArea2" name="selectSubArea2" maxlength='4'>
+                                    <option style="background-color:#3268B6;color:white" value='Selecione uma relevância' selected disabled>Relevância</option>
+                                    <option style="background-color:#3268B6;color:white" value='altissima' >altissima</option>
+                                    <option style="background-color:#3268B6;color:white" value='alta'>alta</option>
+                                    <option style="background-color:#3268B6;color:white" value='media'>media</option>
+                                    <option style="background-color:#3268B6;color:white" value='baixa'>baixa</option>
+                                </select>
+
+                              </td>
+
+                            </tr>
+
+                            <tr>
+                              <th scope="row">
+                                <input  type="checkbox" data-toggle="toggle" id="subArea3"  name="subArea3" value ="selectSubArea3"/>
+                                <label for="subArea3" class="checkbox-inline">ADM - Finanças Internacionais </label>
+                              </th>
+
+                              <td>
+
+                                <select  style="width:118px;background-color:#FFFFFF" class="form-control get-inputRelevancia" type="text"  id="selectSubArea3" name="selectSubArea3" maxlength='4'>
+                                    <option style="background-color:#3268B6;color:white" value='Selecione uma relevância' selected disabled>Relevância</option>
+                                    <option style="background-color:#3268B6;color:white" value='altissima' >altissima</option>
+                                    <option style="background-color:#3268B6;color:white" value='alta'>alta</option>
+                                    <option style="background-color:#3268B6;color:white" value='media'>media</option>
+                                    <option style="background-color:#3268B6;color:white" value='baixa'>baixa</option>
+                                </select>
+
+                              </td>
+
+                            </tr>
+
+                            <tr>
+                              <th scope="row">
+                                <input  type="checkbox" data-toggle="toggle" id="subArea4"  name="subArea4" value ="selectSubArea4"/>
+                                <label for="subArea4" class="checkbox-inline">ADM - Financeira </label>
+                              </th>
+
+                              <td>
+
+                                <select  style="width:118px;background-color:#FFFFFF" class="form-control get-inputRelevancia" type="text"  id="selectSubArea4" name="selectSubArea4" maxlength='4'>
+                                    <option style="background-color:#3268B6;color:white" value='Selecione uma relevância' selected disabled>Relevância</option>
+                                    <option style="background-color:#3268B6;color:white" value='altissima' >altissima</option>
+                                    <option style="background-color:#3268B6;color:white" value='alta'>alta</option>
+                                    <option style="background-color:#3268B6;color:white" value='media'>media</option>
+                                    <option style="background-color:#3268B6;color:white" value='baixa'>baixa</option>
+                                </select>
+
+                              </td>
+
+                            </tr>
+
+                            <tr>
+                              <th scope="row">
+                                <input  type="checkbox" data-toggle="toggle" id="subArea5"  name="subArea5" value ="selectSubArea5"/>
+                                <label for="subArea5" class="checkbox-inline">ADM - Informação </label>
+                              </th>
+
+                              <td>
+
+                                <select  style="width:118px;background-color:#FFFFFF" class="form-control get-inputRelevancia" type="text"  id="selectSubArea5" name="selectSubArea5" maxlength='4'>
+                                    <option style="background-color:#3268B6;color:white" value='Selecione uma relevância' selected disabled>Relevância</option>
+                                    <option style="background-color:#3268B6;color:white" value='altissima' >altissima</option>
+                                    <option style="background-color:#3268B6;color:white" value='alta'>alta</option>
+                                    <option style="background-color:#3268B6;color:white" value='media'>media</option>
+                                    <option style="background-color:#3268B6;color:white" value='baixa'>baixa</option>
+                                </select>
+
+                              </td>
+
+                            </tr>
+
+                            <tr>
+                              <th scope="row">
+                                <input  type="checkbox" data-toggle="toggle" id="subArea6"  name="subArea6" value ="selectSubArea6"/>
+                                <label for="subArea6" class="checkbox-inline">ADM - Recursos Humanos </label>
+                              </th>
+
+                              <td>
+
+                                <select  style="width:118px;background-color:#FFFFFF" class="form-control get-inputRelevancia" type="text"  id="selectSubArea6" name="selectSubArea6" maxlength='4'>
+                                    <option style="background-color:#3268B6;color:white" value='Selecione uma relevância' selected disabled>Relevância</option>
+                                    <option style="background-color:#3268B6;color:white" value='altissima' >altissima</option>
+                                    <option style="background-color:#3268B6;color:white" value='alta'>alta</option>
+                                    <option style="background-color:#3268B6;color:white" value='media'>media</option>
+                                    <option style="background-color:#3268B6;color:white" value='baixa'>baixa</option>
+                                </select>
+
+                              </td>
+
+                            </tr>
+
+
+
+
+                            <tr>
+                              <th scope="row">
+                                <input  type="checkbox" data-toggle="toggle" id="subArea8"  name="subArea8" value ="selectSubArea8"/>
+                                <label for="subArea8" class="checkbox-inline">Administração do Terceiro Setor </label>
+                              </th>
+
+                              <td>
+
+                                <select  style="width:118px;background-color:#FFFFFF" class="form-control get-inputRelevancia" type="text"  id="selectSubArea8" name="selectSubArea8" maxlength='4'>
+                                    <option style="background-color:#3268B6;color:white" value='Selecione uma relevância' selected disabled>Relevância</option>
+                                    <option style="background-color:#3268B6;color:white" value='altissima' >altissima</option>
+                                    <option style="background-color:#3268B6;color:white" value='alta'>alta</option>
+                                    <option style="background-color:#3268B6;color:white" value='media'>media</option>
+                                    <option style="background-color:#3268B6;color:white" value='baixa'>baixa</option>
+                                </select>
+
+                              </td>
+
+                            </tr>
+
+                            <tr>
+                              <th scope="row">
+                                <input  type="checkbox" data-toggle="toggle" id="subArea9"  name="subArea9" value ="selectSubArea9"/>
+                                <label for="subArea9" class="checkbox-inline">ADM - Ciências Agrárias</label>
+                              </th>
+
+                            <td>
+
+                                <select  style="width:118px;background-color:#FFFFFF" class="form-control get-inputRelevancia" type="text"  id="selectSubArea9" name="selectSubArea9" maxlength='4'>
+                                    <option style="background-color:#3268B6;color:white" value='Selecione uma relevância' selected disabled>Relevância</option>
+                                    <option style="background-color:#3268B6;color:white" value='altissima' >altissima</option>
+                                    <option style="background-color:#3268B6;color:white" value='alta'>alta</option>
+                                    <option style="background-color:#3268B6;color:white" value='media'>media</option>
+                                    <option style="background-color:#3268B6;color:white" value='baixa'>baixa</option>
+                                </select>
+
+                              </td>
+
+                            </tr>
+
+
+
+
+                            <tr>
+                              <th scope="row">
+                                <input  type="checkbox" data-toggle="toggle" id="subArea10"  name="subArea10" value ="selectSubArea10"/>
+                                <label for="subArea10" class="checkbox-inline">ADM - Crédito Imobiliário</label>
+                              </th>
+                            <td>
+
+                                <select  style="width:118px;background-color:#FFFFFF" class="form-control get-inputRelevancia" type="text"  id="selectSubArea10" name="selectSubArea10" maxlength='4'>
+                                    <option style="background-color:#3268B6;color:white" value='Selecione uma relevância' selected disabled>Relevância</option>
+                                    <option style="background-color:#3268B6;color:white" value='altissima' >altissima</option>
+                                    <option style="background-color:#3268B6;color:white" value='alta'>alta</option>
+                                    <option style="background-color:#3268B6;color:white" value='media'>media</option>
+                                    <option style="background-color:#3268B6;color:white" value='baixa'>baixa</option>
+                                </select>
+
+                              </td>
+
+                            </tr>
+
+                            <tr>
+                              <th scope="row">
+                                <input  type="checkbox" data-toggle="toggle" id="subArea11"  name="subArea11" value ="selectSubArea11"/>
+                                <label for="subArea11" class="checkbox-inline">ADM - Marketing</label>
+                              </th>
+                            <td>
+
+                                <select  style="width:118px;background-color:#FFFFFF" class="form-control get-inputRelevancia" type="text"  id="selectSubArea11" name="selectSubArea11" maxlength='4'>
+                                    <option style="background-color:#3268B6;color:white" value='Selecione uma relevância' selected disabled>Relevância</option>
+                                    <option style="background-color:#3268B6;color:white" value='altissima' >altissima</option>
+                                    <option style="background-color:#3268B6;color:white" value='alta'>alta</option>
+                                    <option style="background-color:#3268B6;color:white" value='media'>media</option>
+                                    <option style="background-color:#3268B6;color:white" value='baixa'>baixa</option>
+                                </select>
+
+                              </td>
+
+                            </tr>
+
+
+                          </tbody>
+                        </table>
+
+                      </div>
+
+                              </div>
+                          </div>
+
+                          <div style="margin-top:-100px"  id="buttons">
+
+                          <div style="margin-left:750px">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sucesso" data-dismiss="modal">salvar</button>
+                          </div>
+
+                          <div style="margin-top:-34px;margin-left:660px">
+                            <button type="button" class="btn btn-primary"   id="btnAtribuir" name="btnAtribuir" title="Atribuir para subáreas selecionadas!">Atribuir</button>
+                          </div>
+
+                          <div style="margin-top:-34px"  class="col-lg-4">
+                            <select  style="background-color:#E2E6EB" class="form-control get-relevancia" type="text"  name="campoRelevancia" maxlength='4'>
+                                <option style="background-color:#3268B6;color:white" value='Selecione uma relevância' selected disabled>Selecione uma relevância</option>
+                                <option style="background-color:#3268B6;color:white" value='altissima' >altissima</option>
+                                <option style="background-color:#3268B6;color:white" value='alta'>alta</option>
+                                <option style="background-color:#3268B6;color:white" value='media'>media</option>
+                                <option style="background-color:#3268B6;color:white" value='baixa'>baixa</option>
+                            </select>
+                         </div>
+
+
+                          </div>
+
+                </form>
+
+
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+</div>
+
+    </div>
+
+
+    <div  class="modal" id="sucesso">
+      <div class="modal-dialog">
+        <div style="background-color:white ;width:400px" class="modal-content">
+
+          <!-- Modal Header -->
+
+
+          <!-- Modal body -->
+          <div class="modal-body">
+              <h3 style="color:black">Salvo com Sucesso!</h3>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/validacao.js"></script>
+    <script src="js/validator.min.js"></script>
+
+
+  </body>
+</html>
