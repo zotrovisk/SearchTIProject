@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -15,10 +15,157 @@
 
     <script>
       var valueChecked ="";
+      var campoGrad = 0;
+      var campoPosGrad = 0;
+      var resultGrid = "";
+      var validaCampoGrad = "";
+      var hora = "";
+
+
+      function timeNow() {
+        var d = new Date(),
+          h = (d.getHours()<10?'0':'') + d.getHours(),
+          m = (d.getMinutes()<10?'0':'') + d.getMinutes();
+          hora = h + ":" + m;
+      }
+
+      /**
+       * Download de uma lista de arquivos:
+       *
+       */
+      function download_files(files) {
+        function download_next(i) {
+          if (i >= files.length) {
+            return;
+          }
+          var a = document.createElement('a');
+          a.href = files[i].download;
+          a.target = '_parent';
+          if ('download' in a) {
+            a.download = files[i].filename;
+          }
+          // Add a to the doc for click to work.
+          (document.body || document.documentElement).appendChild(a);
+          if (a.click) {
+            a.click(); // The click method is supported by most browsers.
+          } else {
+            $(a).click(); // Backup using jquery
+          }
+          // Delete the temporary link.
+          a.parentNode.removeChild(a);
+          // Download the next file with a small timeout. The timeout is necessary
+          // for IE, which will otherwise only download the first file.
+          setTimeout(function() {
+            download_next(i + 1);
+          }, 500);
+        }
+        // Initiate the first download.
+        download_next(0);
+      }
+
+      // Here's a live example that downloads three test text files:
+       function do_dl() {
+
+
+                  // Example data given in question text
+                  var data = [
+                    ['name1', 'city1', 'some other info'],
+                    ['name2', 'city2', 'more info']
+                  ];
+
+                  // Building the CSV from the Data two-dimensional array
+                  // Each column is separated by ";" and new line "\n" for next row
+                  var csvContent = '';
+                  data.forEach(function(infoArray, index) {
+                    dataString = infoArray.join(';');
+                    csvContent += index < data.length ? dataString + '\n' : dataString;
+                  });
+
+                  //Nome do arquivo,conteúdo e type.
+                  var download = function(content, fileName, mimeType) {
+                    var a = document.createElement('a');
+                    mimeType = mimeType || 'application/octet-stream';
+
+                    if (navigator.msSaveBlob) { // IE10
+                      navigator.msSaveBlob(new Blob([content], {
+                        type: mimeType
+                      }), fileName);
+                    } else if (URL && 'download' in a) { //html5 A[download]
+                      a.href = URL.createObjectURL(new Blob([content], {
+                        type: mimeType
+                      }));
+                      a.setAttribute('download', fileName);
+                      document.body.appendChild(a);
+                      a.click();
+                      document.body.removeChild(a);
+                    } else {
+                      location.href = 'data:application/octet-stream,' + encodeURIComponent(content); // only this mime type is supported
+                    }
+                  }
+
+                  download(csvContent, 'BBM.TAOE021.O8559.D9910.D190121.PTCURSO1.csv', 'text/csv;encoding:utf-8');
+                  download(csvContent, 'BBM.TAOE021.O8559.D9910.D190121.PTCURSO2.csv', 'text/csv;encoding:utf-8');
+                  download(csvContent, 'BBM.TAOE021.O8559.D9910.D190121.PTCURSO3.csv', 'text/csv;encoding:utf-8');
+                  download(csvContent, 'BBM.TAOE021.O8559.D9910.D190121.PTCURSO4.csv', 'text/csv;encoding:utf-8');
+
+
+
+
+         //timeNow();
+       }
+
+
+
+
 
       $(function () {
         $('#pills-tab li:first-child a').tab('show')
       })
+
+      function eventoGridRd1() {
+
+        alert("eventoGridRd1");
+
+        $(document).on('change', '#gridRadios1', function () {
+          /*Critérios de Pontuação Graduação: */
+
+
+                  var result  =  parseInt( $(this).val() );
+                  resultGrid = $(this).val() ;
+                  alert("resultgrid: "+resultGrid);
+
+                  alert(result);
+
+                  if(validaCampoGrad != "" && resultGrid != ""){
+
+
+                    $("#btnPos").attr("disabled", false);
+
+                  }else{
+
+
+                  }
+
+
+              });
+
+      }
+
+      $(document).on('change', '#gridRadios1', function () {
+        /*Critérios de Pontuação Graduação: */
+        alert("gridRadios1.");
+
+                var result  =  parseInt( $(this).val() );
+                resultGrid = $(this).val() ;
+                alert("resultgrid: "+resultGrid);
+
+                alert(result);
+
+                if(validaCampoGrad != "" && resultGrid != ""){
+                  $("#btnPos").attr("disabled", false);
+
+                }else{}
+            });
 
 
       $(document).on('change', '.get-relevancia', function () {
@@ -26,6 +173,33 @@
 
 
       });
+
+
+      $(document).on('change', '#codPontGrad', function () {
+        alert("Onchange");
+          eventoGridRd1();
+
+             validaCampoGrad = $(this).val();
+             campoGrad = parseFloat( $(this).val() );
+             alert("validaCampoGrad: "+validaCampoGrad);
+
+             if(validaCampoGrad != "" && resultGrid != ""){
+
+
+               $("#btnPos").attr("disabled", false);
+
+             }else{
+
+
+             }
+
+
+      });
+
+
+
+
+
 
 $(document).on('change', '.get-inputRelevancia', function () {
          //valueChecked = $(this).val();
@@ -60,6 +234,77 @@ $(document).on('change', '.get-inputRelevancia', function () {
       });
 
 
+
+
+
+            $(document).on('change', '#gridRadios2', function () {
+              /*Critérios de Pontuação Pós Graduação: */
+
+              var elemento2 =  document.getElementById("codPontPosGrad");
+              campoPosGrad = parseFloat( $(elemento2).val() );
+
+
+                      var val  =   $(this).val();
+
+
+                       if(val == "100"){
+
+                        alert("entrou 100");
+                        alert("campoPosGrad: "+campoPosGrad);
+                        alert("campoGrad:"+campoGrad);
+
+                        var calc1 = (campoPosGrad / campoGrad) * 100;
+                        var format = "0"+calc1+"00";
+                        alert(format);
+
+                       }
+
+                       if(val == "100+50"){
+
+                         alert("entrou 100+50");
+                         alert("campoPosGrad: "+campoPosGrad);
+                         alert("campoGrad:"+campoGrad);
+
+                        var calc2 = (((campoPosGrad * 2)/3)/campoGrad) * 100 ;
+                        /*Arredondar e concatenar o resultado com zero à esquerda*/
+                        var resultDecimal = true;
+
+                        alert("here: "+calc2 % 1);
+
+                         if(calc2 % 1 === 0){
+                           resultDecimal = false;
+                        }else{
+                          resultDecimal = true;
+                        }
+
+                        if( resultDecimal == true ){
+                          var resultadoArredondado =( calc2.toFixed(2) ) * 100;
+                          var result2 = "0" + String(resultadoArredondado);
+                          alert(result2);
+                        }else{
+                          var result3 = "0" + String(resultadoArredondado) + "00";
+                          alert(result3);
+                        }
+
+
+                       }
+
+                       if(val == "100+100"){
+                         alert("entrou 100+100");
+                         alert("campoPosGrad: "+campoPosGrad);
+                         alert("campoGrad:"+campoGrad);
+
+                        var calc2 = ((campoPosGrad / 2) / campoGrad) * 100 ;
+                        alert(calc2);
+
+                       }
+
+
+                  });
+
+
+
+
       $(document).on('click', '#btnAtribuir', function (e) {
 
         $('input[type="checkbox"]').each(function() {
@@ -73,7 +318,22 @@ $(document).on('change', '.get-inputRelevancia', function () {
        });
     });
 
+    $(document).on('click', '#btnPrevia', function (e) {
+        //  alert("teste2");
+          //alert(campoPosGrad);
 
+        var elemento2 =  document.getElementById("codPontPosGrad");
+        campoPosGrad = parseFloat( $(elemento2).val() );
+          //alert("Pós: "+campoPosGrad);
+
+          if(campoPosGrad != "" && campoGrad !=""){
+            alert("Gerar Prévia");
+          }else{
+            alert("Campos não preenchidos");
+          }
+
+
+    });
 
 
 
@@ -97,7 +357,6 @@ $(document).on('change', '.get-inputRelevancia', function () {
   function limita(numero){
   var max_numeros = 5;
   console.log("Valor numero: "+numero.value);
-
   if(numero.value.length > max_numeros) {
     numero.value = numero.value.substr(0, max_numeros);
   }
@@ -217,7 +476,7 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
         </style>
 
   </head>
-  <body onload="loadNav()">
+  <body>
 
     <nav class="navbar navbar-default">
       <div class="container">
@@ -302,17 +561,12 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
             <li class="nav-item">
               <a class="nav-link active" id="pills-graduacao-tab" data-toggle="pill" href="#pills-graduacao" role="tab" aria-controls="pills-graduacao" aria-selected="true">Pontuação Formação Superior</a>
             </li>
-
-
-            <li class="nav-item">
-              <a class="nav-link" id="pills-previa-tab" data-toggle="pill" href="#pills-previa" role="tab" aria-controls="pills-previa" aria-selected="false">Prévia</a>
-            </li>
           </ul>
           <div class="tab-content" id="pills-tabContent">
 
             <div class="tab-pane fade" id="pills-tabela" role="tabpanel" aria-labelledby="pills-tabela-tab">
                         </br>
-                            <label for="codfuncao">Código TAO</label>
+                            <label for="codfuncao">Código Da Tabela</label>
                             <input  style="width:280px" id="codfuncao" class="form-control" placeholder="Código da tabela"   required />
                             </br>
                             <label for="codfuncao">Nome da Tabela</label>
@@ -324,10 +578,11 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
 
             </br>
                 <label for="codfuncao">Pontuação Graduação</label>
-                <input  style="width:280px" id="codfuncao" class="form-control" placeholder="pontuação"   required />
+                <img  src="baseline-info-24px.svg" alt="Img Dica" data-toggle="tooltip" data-placement="top" title="Dica"/>
+                <input  type= "number" style="width:280px" id="codPontGrad" name = "codPontGrad" class="form-control" placeholder="pontuação"   required />
                 </br>
 
-                  <fieldset class="form-group">
+                  <fieldset class="form-group teste11">
                           <div style="margin-left: 2px;width:500px;background-color:#EAEDED" class="row">
 
                             <div class="col-sm-10">
@@ -337,21 +592,21 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
                             </br>
                               <div class="form-check">
 
-                                <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="option1"  checked>
-                                <label  class="form-check-label" for="gridRadios1">
+                                <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="100"  >
+                                <label  class="form-check-label" for="gridRadios2">
                                 100% maior pontuação
                                 </label>
 
                               </div>
                               <div class="form-check">
 
-                                <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="option2">
-                                <label class="form-check-label" for="gridRadios2"><h5  style="color:black" id="dicaRd1" onmouseout="escondePopover('dicaRd1')" onmouseover="exibePopover('dicaRd1')" data-container="body" data-toggle="popover" data-placement="top" data-content="Pontua 2 cursos de graduação onde a segunda graduaçao vale 50% da primeira">
+                                <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="66.67">
+                                <label value="" class="form-check-label" for="gridRadios2"><h5  style="color:black" id="dicaRd1" onmouseout="escondePopover('dicaRd1')" onmouseover="exibePopover('dicaRd1')" data-container="body" data-toggle="popover" data-placement="top" data-content="Pontua 2 cursos de graduação onde a segunda graduaçao vale 50% da primeira">
                                    100% maior pontuação + 50% 2&#170; maior pontuação</label>
                               </div>
                               <div class="form-check">
 
-                                <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios'" value="option3">
+                                <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="50">
                                 <label class="form-check-label" for="gridRadios2"><h5  style="color:black" id="dicaRd2" onmouseout="escondePopover('dicaRd2')" onmouseover="exibePopover('dicaRd2')" data-container="body" data-toggle="popover" data-placement="top" data-content="Pontua 2 cursos de graduação onde a segunda graduaçao vale 100% da primeira">
                                    100% maior pontuação + 100% 2&#170; maior pontuação</label>
                               </div>
@@ -361,15 +616,16 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
 
 
                 <p>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+  <button style="background:#94b8b8" id="btnPos" name="btnPos" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" disabled>
     Pós Graduação
   </button>
+
 </p>
 <div class="collapse" id="collapseExample">
   <div class="card card-body">
   </br>
         <label for="codfuncao">Pontuação Pós Graduação</label>
-        <input  style="width:280px" id="codfuncao" class="form-control" placeholder="pontuação"   required />
+        <input id="codPontPosGrad" name="codPontPosGrad" style="width:280px" id="codfuncao" class="form-control" placeholder="pontuação"   required />
         </br>
 
       <fieldset class="form-group">
@@ -382,7 +638,7 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
                 </br>
                   <div class="form-check">
 
-                    <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="option1" checked>
+                    <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2"  value="100">
                     <label class="form-check-label" for="gridRadios2">
                     <h5  style="color:black">100% maior pontuação </h5>
                     </label>
@@ -390,7 +646,7 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
                   </div>
                   <div class="form-check">
 
-                    <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="option2">
+                    <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="100+50">
 
                     <label class="form-check-label" for="gridRadios2"><h5  style="color:black" id="dicaRd1" >
                        100% maior pontuação + 50% 2&#170; maior pontuação</h5></label>
@@ -399,7 +655,7 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
                   </div>
                   <div class="form-check">
 
-                    <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="option3">
+                    <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="100+100">
                     <label class="form-check-label" for="gridRadios2"><h5  style="color:black" id="dicaRd2">
                        100% maior pontuação + 100% 2&#170; maior pontuação</label>
 
@@ -407,6 +663,13 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
                   </div>
                 </div>
               </div>
+            </br>
+
+             <button onclick="do_dl();" style="background:#94b8b8" id="btnPrev" name="btnPrev" class="btn btn-primary" type="button">
+               Download
+             </button>
+
+
     </fieldset>
 
 
@@ -419,10 +682,7 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
              </div>
 
 
-            <div class="tab-pane fade" id="pills-previa" role="tabpanel" aria-labelledby="pills-previa-tab">
-...j
 
-            </div>
           </div>
 
           <div>
@@ -597,6 +857,17 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
                                   <table style="margin-left:30px;margin-top:10px;width:800px"class="table table-striped">
                           <thead>
                             <tr>
+                              <div style="margin-left:540px;margin-top:-20px"  class="col-lg-4">
+                                <select  style="background-color:#E2E6EB" class="form-control get-relevancia" type="text"  name="campoRelevancia" maxlength='4'>
+                                    <option style="background-color:#3268B6;color:white" value='Selecione uma relevância' selected disabled>Selecione uma relevância</option>
+                                    <option style="background-color:#3268B6;color:white" value='altissima' >altissima</option>
+                                    <option style="background-color:#3268B6;color:white" value='alta'>alta</option>
+                                    <option style="background-color:#3268B6;color:white" value='media'>media</option>
+                                    <option style="background-color:#3268B6;color:white" value='baixa'>baixa</option>
+                                </select>
+                             </div>
+                           </br>
+
                               <th scope="col">Subárea</th>
                               <th scope="col">Relevância</th>
                             </tr>
@@ -831,15 +1102,7 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
                             <button type="button" class="btn btn-primary"   id="btnAtribuir" name="btnAtribuir" title="Atribuir para subáreas selecionadas!">Atribuir</button>
                           </div>
 
-                          <div style="margin-top:-34px"  class="col-lg-4">
-                            <select  style="background-color:#E2E6EB" class="form-control get-relevancia" type="text"  name="campoRelevancia" maxlength='4'>
-                                <option style="background-color:#3268B6;color:white" value='Selecione uma relevância' selected disabled>Selecione uma relevância</option>
-                                <option style="background-color:#3268B6;color:white" value='altissima' >altissima</option>
-                                <option style="background-color:#3268B6;color:white" value='alta'>alta</option>
-                                <option style="background-color:#3268B6;color:white" value='media'>media</option>
-                                <option style="background-color:#3268B6;color:white" value='baixa'>baixa</option>
-                            </select>
-                         </div>
+
 
 
                           </div>
@@ -891,8 +1154,8 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
 
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!--CDN: jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/validacao.js"></script>
