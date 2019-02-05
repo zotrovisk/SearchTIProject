@@ -20,6 +20,9 @@
       var resultGrid = "";
       var validaCampoGrad = "";
       var hora = "";
+      var valuePos = "";
+      var valueNomeTab = "";
+      var valueCodTab = "";
 
 
       function timeNow() {
@@ -67,54 +70,176 @@
        function do_dl() {
 
 
-                  // Example data given in question text
-                  var data = [
-                    ['name1', 'city1', 'some other info'],
-                    ['name2', 'city2', 'more info']
-                  ];
+          tabela1();
+          tabela2();
+          tabela3();
+          tabela4();
 
-                  // Building the CSV from the Data two-dimensional array
-                  // Each column is separated by ";" and new line "\n" for next row
-                  var csvContent = '';
-                  data.forEach(function(infoArray, index) {
-                    dataString = infoArray.join(';');
-                    csvContent += index < data.length ? dataString + '\n' : dataString;
-                  });
+       }
 
-                  //Nome do arquivo,conteúdo e type.
-                  var download = function(content, fileName, mimeType) {
-                    var a = document.createElement('a');
-                    mimeType = mimeType || 'application/octet-stream';
+function createCsvObject(contentObj,fileNameObj,mimeTypeObj){
 
-                    if (navigator.msSaveBlob) { // IE10
-                      navigator.msSaveBlob(new Blob([content], {
-                        type: mimeType
-                      }), fileName);
-                    } else if (URL && 'download' in a) { //html5 A[download]
-                      a.href = URL.createObjectURL(new Blob([content], {
-                        type: mimeType
-                      }));
-                      a.setAttribute('download', fileName);
-                      document.body.appendChild(a);
-                      a.click();
-                      document.body.removeChild(a);
-                    } else {
-                      location.href = 'data:application/octet-stream,' + encodeURIComponent(content); // only this mime type is supported
-                    }
-                  }
+  //Nome do arquivo,conteúdo e type.
+  var download = function(content, fileName, mimeType) {
+    var a = document.createElement('a');
+    mimeType = mimeType || 'application/octet-stream';
 
-                  download(csvContent, 'BBM.TAOE021.O8559.D9910.D190121.PTCURSO1.csv', 'text/csv;encoding:utf-8');
-                  download(csvContent, 'BBM.TAOE021.O8559.D9910.D190121.PTCURSO2.csv', 'text/csv;encoding:utf-8');
-                  download(csvContent, 'BBM.TAOE021.O8559.D9910.D190121.PTCURSO3.csv', 'text/csv;encoding:utf-8');
-                  download(csvContent, 'BBM.TAOE021.O8559.D9910.D190121.PTCURSO4.csv', 'text/csv;encoding:utf-8');
+    if (navigator.msSaveBlob) { // IE10
+      navigator.msSaveBlob(new Blob([content], {
+        type: mimeType
+      }), fileName);
+    } else if (URL && 'download' in a) { //html5 A[download]
+      a.href = URL.createObjectURL(new Blob([content], {
+        type: mimeType
+      }));
+      a.setAttribute('download', fileName);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } else {
+      location.href = 'data:application/octet-stream,' + encodeURIComponent(content); // only this mime type is supported
+    }
+  }
+
+    //alert(contentObj);
+    //alert(fileNameObj);
+    //alert(mimeTypeObj);
+
+    download(contentObj, fileNameObj, mimeTypeObj);
+
+}
 
 
+ //Criar e preencher o arquivo csv específico da tabela 1.
+       function tabela1(){
+               var sequencialTab1 = "1";
 
+                           // Example data given in question text
+                           var data = [
+                             //Coluna 1 Sequencial
+                             //Coluna 2 número da tabela
+                             //Coluna 3 nome da tabela 1
 
-         //timeNow();
+                             [sequencialTab1, valueCodTab, valueNomeTab], //Linha 1 com 3 colunas
+                             [sequencialTab1, valueCodTab, valueNomeTab],
+                             [sequencialTab1,valueCodTab,valueNomeTab]
+                           ];
+
+                           // Building the CSV from the Data two-dimensional array
+                           // Each column is separated by ";" and new line "\n" for next row
+                           var csvContentTabela1 = '';
+                           data.forEach(function(infoArray, index) {
+                             dataString = infoArray.join(';');
+                             csvContentTabela1 += index < data.length ? dataString + '\n' : dataString;
+                           });
+
+         createCsvObject(csvContentTabela1, 'BBM.TAOE021.O8559.D9910.D190121.PTCURSO1.csv', 'text/csv;encoding:utf-8');
+
        }
 
 
+       //Criar e preencher o arquivo csv específico da tabela 2.
+             function tabela2(){
+                          var sequencialTab3 = "2";
+
+
+                               //Coluna 1 Sequencial
+                               //Coluna 2 número da tabela
+                               //Coluna 3 relevância
+                               //Coluna 4 valor da relevância
+
+                                 var data = [
+                                   [sequencialTab3, valueCodTab, '1',], //Linha 1 com 4 colunas
+                                   [sequencialTab3, valueCodTab, '2',],
+                                   [sequencialTab3,valueCodTab,'3',]
+                                 ];
+
+                                 // Building the CSV from the Data two-dimensional array
+                                 // Each column is separated by ";" and new line "\n" for next row
+                                 var csvContentTabela2 = '';
+                                 data.forEach(function(infoArray, index) {
+                                   dataString = infoArray.join(';');
+                                   csvContentTabela2 += index < data.length ? dataString + '\n' : dataString;
+                                 });
+
+
+
+
+               createCsvObject(csvContentTabela2, 'BBM.TAOE021.O8559.D9910.D190121.PTCURSO2.csv', 'text/csv;encoding:utf-8');
+
+             }
+
+
+             //Criar e preencher o arquivo csv específico da tabela 3.
+                   function tabela3(){
+                     var valLinha1 = '01250';
+                     var valLinha2 = '02500';
+                     var valLinha4 = '02000';
+                     var valLinha5 = '00000';
+                     var sequencialTab3 = '3';
+
+
+                     //Coluna 1 Sequencial
+                     //Coluna 2 número da tabela
+                     //Coluna 3  Número da linha
+                     //Coluna 4 Percentual
+                                       var data = [
+                                         [sequencialTab3, valueCodTab, '1',valLinha1+";"], //Linha 1 com 4 colunas
+                                         [sequencialTab3, valueCodTab, '2',valLinha2+";"],
+                                         [sequencialTab3,valueCodTab,'3',resultGrid+";"],
+                                         [sequencialTab3, valueCodTab, '4',valLinha4+";"],
+                                         [sequencialTab3, valueCodTab, '5',valLinha5+";"],
+                                         [sequencialTab3,valueCodTab,'6',valuePos+";"],
+                                         [sequencialTab3,valueCodTab,'7',valuePos+";"],
+                                         [sequencialTab3,valueCodTab,'8',valuePos+";"]
+                                       ];
+
+                                       // Building the CSV from the Data two-dimensional array
+                                       // Each column is separated by ";" and new line "\n" for next row
+                                       var csvContentTabela3 = '';
+                                       data.forEach(function(infoArray, index) {
+                                         dataString = infoArray.join(';');
+                                         csvContentTabela3 += index < data.length ? dataString + '\r\n' : dataString;
+                                       });
+
+                                       createCsvObject(csvContentTabela3, 'BBM.TAOE021.O8559.D9910.D190121.PTCURSO3.csv', 'text/csv;encoding:utf-8');
+
+
+                   }
+
+
+                   //Criar e preencher o arquivo csv específico da tabela 4.
+                         function tabela4(){
+
+
+                                           //Coluna 1 Sequencial
+                                           //Coluna 2 número da tabela
+                                           //Coluna 3 Código do conhecimento
+                                           //Coluna 4 Relevância
+                                           //Coluna 5 Nome do conhecimento
+
+                                             var data = [
+
+                                               ['4', '6698', '100010000','1','ADMINISTRACAO DE EMPRESAS'],
+                                               ['4', '6698', '100200000','1','ADM. - COMERCIO EXTERIOR'],
+                                               ['4','6698','100210000','1','ADM. - FINANCAS INTERNACIONA']
+
+                                             ];
+
+                                             // Building the CSV from the Data two-dimensional array
+                                             // Each column is separated by ";" and new line "\n" for next row
+                                             var csvContentTabela4 = '';
+                                             data.forEach(function(infoArray, index) {
+                                               dataString = infoArray.join(';');
+                                               csvContentTabela4 += index < data.length ? dataString + '\n' : dataString;
+                                             });
+
+
+                                             createCsvObject(csvContentTabela4, 'BBM.TAOE021.O8559.D9910.D190121.PTCURSO4.csv', 'text/csv;encoding:utf-8');
+
+
+
+                         }
 
 
 
@@ -184,17 +309,43 @@
              alert("validaCampoGrad: "+validaCampoGrad);
 
              if(validaCampoGrad != "" && resultGrid != ""){
-
-
                $("#btnPos").attr("disabled", false);
-
-             }else{
-
-
              }
 
+      });
+
+      $(document).on('change', '#codTabela', function () {
+        alert("Onchange-codTabela");
+
+
+             valueCodTab = $(this).val();
+
+             alert("valueCodTab: "+valueCodTab);
+      });
+
+
+      $(document).on('change', '#nomeTabela', function () {
+
+        alert("Onchange-nomeTabela");
+
+             valueNomeTab = $(this).val();
+
+             alert("nomeTabela: "+valueNomeTab);
 
       });
+
+
+      $(document).on('change', '#select', function () {
+
+        alert("Onchange-select");
+
+             valueNomeTab = $(this).val();
+
+             alert("nomeTabela: "+valueNomeTab);
+
+      });
+
+
 
 
 
@@ -255,7 +406,8 @@ $(document).on('change', '.get-inputRelevancia', function () {
 
                         var calc1 = (campoPosGrad / campoGrad) * 100;
                         var format = "0"+calc1+"00";
-                        alert(format);
+                        valuePos = format;
+                        alert("valuePos: "+valuePos);
 
                        }
 
@@ -280,10 +432,12 @@ $(document).on('change', '.get-inputRelevancia', function () {
                         if( resultDecimal == true ){
                           var resultadoArredondado =( calc2.toFixed(2) ) * 100;
                           var result2 = "0" + String(resultadoArredondado);
-                          alert(result2);
+                          alert("valuePos: "+result2);
+                          valuePos = result2;
                         }else{
                           var result3 = "0" + String(resultadoArredondado) + "00";
-                          alert(result3);
+                          alert("valuePos: "+result3);
+                          valuePos = result3;
                         }
 
 
@@ -295,7 +449,9 @@ $(document).on('change', '.get-inputRelevancia', function () {
                          alert("campoGrad:"+campoGrad);
 
                         var calc2 = ((campoPosGrad / 2) / campoGrad) * 100 ;
-                        alert(calc2);
+
+                        valuePos = ""+calc2;
+                        //alert("valuePos..: "+valuePos);
 
                        }
 
@@ -515,11 +671,10 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
 
         <div style="margin-left:5px" class="row justify-content-md-center">
 
-          <div >
+          <div>
             <label style="margin-left:-5px" for="codoportunidade">Código da Oportunidade</label>
             <input style="margin-left:-5px ;width:50px" id="codoportunidadeLetras" class="form-control"  type="text"  maxlength="3" onKeyPress="return bloqueiaNumero(event);" required/>
             <input style="margin-left:70px;margin-top:-35px;width:200px" id="codoportunidadeNumeros" class="form-control" type="number"  onkeydown="add(this);" onkeyup="add(this);"  required /></br>
-
           </div>
           <span style="margin-left:-5px;margin-top:-14px" class="help-block">O Código da Função deve conter 3 letras e cinco (5) digitos respectivamente.</span>
 
@@ -567,12 +722,15 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
             <div class="tab-pane fade" id="pills-tabela" role="tabpanel" aria-labelledby="pills-tabela-tab">
                         </br>
                             <label for="codfuncao">Código Da Tabela</label>
-                            <input  style="width:280px" id="codfuncao" class="form-control" placeholder="Código da tabela"   required />
-                            </br>
+                            <input  id = "codTabela" name = "codTabela"  style="width:280px" id="codTabela" class="form-control" placeholder="Código da tabela"   required />
+                            </br
                             <label for="codfuncao">Nome da Tabela</label>
-                            <input  style="width:280px" id="codfuncao" class="form-control" placeholder="Nome da tabela"   required />
+                            <input  style="width:280px" id="nomeTabela" name="nomeTabela" class="form-control" placeholder="Nome da tabela"   required />
 
             </div>
+
+
+
 
             <div class="tab-pane fade" id="pills-graduacao" role="tabpanel" aria-labelledby="pills-graduacao-tab">
 
@@ -600,7 +758,7 @@ if ((tecla >= 97 && tecla <= 117) || (tecla === 8)){
                               </div>
                               <div class="form-check">
 
-                                <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="66.67">
+                                <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="6667">
                                 <label value="" class="form-check-label" for="gridRadios2"><h5  style="color:black" id="dicaRd1" onmouseout="escondePopover('dicaRd1')" onmouseover="exibePopover('dicaRd1')" data-container="body" data-toggle="popover" data-placement="top" data-content="Pontua 2 cursos de graduação onde a segunda graduaçao vale 50% da primeira">
                                    100% maior pontuação + 50% 2&#170; maior pontuação</label>
                               </div>
